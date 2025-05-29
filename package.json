@@ -1,0 +1,40 @@
+{
+  "name": "kaiser-willys-csv-parser",
+  "version": "1.0.0",
+  "description": "Electron app for parsing CSV files",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.kaiserwillys.csvparser",
+    "productName": "Kaiser Willys CSV Parser",
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "parser/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "parser/",
+        "to": "parser",
+        "filter": ["**/*"]
+      }
+    ],
+    "mac": {
+      "target": "dmg",
+      "icon": "icon.icns"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    }
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3"
+  }
+}
