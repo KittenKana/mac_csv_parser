@@ -1,0 +1,34 @@
+name: Build Electron App for macOS
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  build-mac:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build macOS App
+        run: npm run dist
+
+      - name: Upload DMG and ZIP
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-build
+          path: |
+            dist/*.dmg
+            dist/*.zip
